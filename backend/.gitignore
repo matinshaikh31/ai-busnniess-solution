@@ -1,0 +1,6 @@
+# Ignore Git submodules
+.gitmodules
+**/.git
+
+# Ignore node modules
+node_modules/
