@@ -1,0 +1,38 @@
+[
+    {
+        "product_name": "ABC Manufacturing",
+        "price": 500,
+        "website": "http://www.abcmfg.com",
+        "country": "Germany",
+        "contact_data": "contact@abcmfg.com",
+        "manufacturing_capabilities": "Steel manufacturing, Metal processing",
+        "certifications": ["ISO 9001", "CE"],
+        "customer_reviews": "High-quality steel products.",
+        "industries_served": ["Automotive", "Construction"],
+        "company_metadata": {
+            "founded": 1985,
+            "employees": 500,
+            "headquarters": "Berlin, Germany"
+        },
+        "annual_revenue": 10000000,
+        "reliability_score": 90
+    },
+    {
+        "product_name": "XYZ Supplies",
+        "price": 700,
+        "website": "http://www.xyzsupplies.com",
+        "country": "USA",
+        "contact_data": "sales@xyzsupplies.com",
+        "manufacturing_capabilities": "Electronic components, Circuit boards",
+        "certifications": ["ISO 14001", "CE"],
+        "customer_reviews": "Reliable and eco-friendly electronics.",
+        "industries_served": ["Electronics", "Telecommunications"],
+        "company_metadata": {
+            "founded": 2000,
+            "employees": 300,
+            "headquarters": "California, USA"
+        },
+        "annual_revenue": 50000000,
+        "reliability_score": 85
+    }
+]
