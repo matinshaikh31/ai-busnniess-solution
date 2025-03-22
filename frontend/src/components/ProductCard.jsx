@@ -19,13 +19,13 @@ const ProductCard = ({ product }) => {
         {product.company_metadata?.min_order && `MOQ: ${product.company_metadata.min_order}`}
       </p>
       <div className="flex justify-between mt-4">
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        <button className="bg-blue-500 hover:bg-blue-700 text-white  py-2 px-4 rounded">
           Chat Now
         </button>
-        <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded">
+        <button className="bg-gray-300 hover:bg-gray-400 text-gray-800  py-2 px-4 rounded">
           Contact Supplier
         </button>
-        <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+        <button className="bg-green-500 hover:bg-green-700 text-white  py-2 px-4 rounded">
           View Profile
         </button>
       </div>
