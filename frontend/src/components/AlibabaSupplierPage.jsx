@@ -6,7 +6,7 @@ import Filters from "./Filters";
 
 import SearchBar from "./SearchBar";
 
-import { products } from "../data";
+// import { products } from "../data";
 
 import { db, collection, getDocs } from "../firebase";
 
@@ -43,7 +43,7 @@ const AlibabaSupplierPage = () => {
 
   // }, []);
 
-  // const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState([]);
 
   const fetchProducts = async () => {
     try {
@@ -66,42 +66,50 @@ const AlibabaSupplierPage = () => {
       const formattedProducts = querySnapshot.docs.map((doc) => {
         const data = doc.data();
 
-        console.log("Processing Document:", doc.id, data);
+        // console.log("Processing Document:", doc.id, data);
 
         return {
           id: doc.id,
 
-          product_name: data.name || "Unknown Product",
+          product_name: data["Company Name"] || "Unknown Company",
 
-          price: null, // No price info available
+          price: data.Price || "Not Available",
 
-          website: null, // No website info available
+          website: data.Website || "No Website Available",
 
-          country: data.location || "Unknown",
+          country: data.Country || "Unknown",
 
-          contact_data: data.contact || "Not Available",
+          location: data.Location || "Unknown",
 
-          manufacturing_capabilities: data.manufacturing_process || "Unknown",
+          customers: data.Customers || "N/A",
 
-          certifications: data.certifications || [],
+          description: data.Description || "No Description Available",
 
-          customer_reviews: data.rating ? `${data.rating} stars` : "No reviews",
+          manufacturing_capabilities:
+            data["Manufacturing Capabilities"] || "Unknown",
 
-          industries_served: data.industry ? [data.industry] : [],
+          certifications: data.Certifications || "N/A",
+
+          customer_reviews: data.Rating ? `${data.Rating} stars` : "No reviews",
+
+          industries_served:
+            data["Industries Served"] !== "N/A"
+              ? [data["Industries Served"]]
+              : [],
 
           company_metadata: {
-            image: "default-image.jpg", // Set a default image path
-
+            employees: data["Company Metadata"]?.Employees || "N/A",
+            annual_revenue:
+              data["Company Metadata"]?.["Annual Revenue"] || "N/A",
+            image: "default-image.jpg", // Default image placeholder
             min_order: "N/A",
           },
 
-          annual_revenue: null,
-
-          reliability_score: data.rating || 0,
+          reliability_score: data.Rating ? parseFloat(data.Rating) || 0 : 0,
         };
       });
 
-      console.log("Formatted Firestore Data:", formattedProducts);
+      // console.log("Formatted Firestore Data:", formattedProducts);
 
       setProducts(formattedProducts);
     } catch (error) {
@@ -136,34 +144,34 @@ const AlibabaSupplierPage = () => {
   // Optimized filtering using useMemo
 
   const filteredProducts = useMemo(() => {
-    return products.products.filter((product) => {
+    return products.filter((product) => {
+      // console.log("Filtering Product:", product);
+
       return (
         // Country filter
-
-        (!filters.country || product.country === filters.country) &&
+        (!filters.country ||
+          product.country?.toLowerCase() === filters.country.toLowerCase()) &&
         // Industry filter
-
         (!filters.industry ||
-          product.industries_served.includes(filters.industry)) &&
+          product.industries_served?.some((industry) =>
+            industry.toLowerCase().includes(filters.industry.toLowerCase())
+          )) &&
         // Certification filter
-
         (!filters.certification ||
-          product.certifications.includes(filters.certification)) &&
+          product.certifications?.some((cert) =>
+            cert.toLowerCase().includes(filters.certification.toLowerCase())
+          )) &&
         // Manufacturing capability filter
-
         (!filters.manufacturingCapability ||
-          product.manufacturing_capabilities
-
-            .toLowerCase()
-
-            .includes(filters.manufacturingCapability.toLowerCase())) &&
+          (product.manufacturing_capabilities?.toLowerCase() || "").includes(
+            filters.manufacturingCapability.toLowerCase()
+          )) &&
         // Search term filter
-
         (!searchTerm ||
           product.product_name.toLowerCase().includes(searchTerm.toLowerCase()))
       );
     });
-  }, [filters, searchTerm]);
+  }, [products, filters, searchTerm]); // Ensure `products` is added as a dependency
 
   return (
     <div className="container mx-auto p-4">

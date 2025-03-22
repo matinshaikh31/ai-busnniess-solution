@@ -14,6 +14,8 @@ const Filters = ({
     manufacturingCapability: "",
   });
 
+
+  console.log("Filters -> availableCountries", availableCountries);
   const manufacturingCapabilities = [
     "OEM", 
     "ODM", 
