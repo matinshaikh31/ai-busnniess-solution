@@ -50,7 +50,7 @@ const Filters = ({
           className="w-full p-3 border rounded-lg bg-gray-100 focus:ring-2 focus:ring-blue-400 transition-all"
         >
           <option value="">All Countries</option>
-          {availableCountries.map((country) => (
+          {availableCountries?.map((country) => (
             <option key={country} value={country}>
               {country}
             </option>
@@ -70,7 +70,7 @@ const Filters = ({
           className="w-full p-3 border rounded-lg bg-gray-100 focus:ring-2 focus:ring-green-400 transition-all"
         >
           <option value="">All Industries</option>
-          {availableIndustries.map((industry) => (
+          {availableIndustries?.map((industry) => (
             <option key={industry} value={industry}>
               {industry}
             </option>
@@ -90,7 +90,7 @@ const Filters = ({
           className="w-full p-3 border rounded-lg bg-gray-100 focus:ring-2 focus:ring-yellow-400 transition-all"
         >
           <option value="">All Certifications</option>
-          {availableCertifications.map((certification) => (
+          {availableCertifications?.map((certification) => (
             <option key={certification} value={certification}>
               {certification}
             </option>
@@ -110,7 +110,7 @@ const Filters = ({
           className="w-full p-3 border rounded-lg bg-gray-100 focus:ring-2 focus:ring-red-400 transition-all"
         >
           <option value="">All Capabilities</option>
-          {manufacturingCapabilities.map((capability) => (
+          {manufacturingCapabilities?.map((capability) => (
             <option key={capability} value={capability}>
               {capability}
             </option>
